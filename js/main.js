@@ -35,27 +35,25 @@ $(document).ready(function () {
   });
 
   // Open search type
-  const popup = document.querySelector('.search__type');
-  const inputs = document.querySelectorAll('.search__field input');
+  const fields = document.querySelectorAll('.search__field');
 
-  // Проверяем, что блок существует
-  if (popup && inputs.length > 0) {
+  fields.forEach(field => {
+    const input = field.querySelector('input');
+    const popup = field.querySelector('.search__type');
 
-    inputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        popup.classList.add('search__type--show');
-      });
+    if (!input || !popup) return;
+
+    input.addEventListener('focus', () => {
+      popup.classList.add('search__type--show');
     });
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search__field input') &&
-          !e.target.closest('.search__type')) 
-      {
+      // если клик не по этому полю и не по его popup
+      if (!field.contains(e.target)) {
         popup.classList.remove('search__type--show');
       }
     });
-
-  }
+  });
 
   // P-search__type
   $('.p-search__type a').on('click', function(e) {

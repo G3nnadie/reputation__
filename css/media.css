@@ -259,7 +259,7 @@
     border-radius: 12px;
     width: 52px;height: 52px;
   }
-  .search__body .btn--primary svg {
+  .search__body .btn i {
     margin-right: 0;
   }
   .search__type {
