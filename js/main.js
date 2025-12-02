@@ -37,18 +37,37 @@ $(document).ready(function () {
   // Open search type
   const fields = document.querySelectorAll('.search__field');
 
+  // Если ни одного .search__field нет — выходим
+  if (!fields.length) return;
+
+  // Открытие модалки при клике / фокусе на любом инпуте
   fields.forEach(field => {
-    const input = field.querySelector('input');
+    const inputs = field.querySelectorAll('input');
     const popup = field.querySelector('.search__type');
 
-    if (!input || !popup) return;
+    // Проверяем наличие инпутов и popup внутри данного блока
+    if (!inputs.length || !popup) return;
 
-    input.addEventListener('focus', () => {
-      popup.classList.add('search__type--show');
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        popup.classList.add('search__type--show');
+      });
+
+      input.addEventListener('click', () => {
+        popup.classList.add('search__type--show');
+      });
     });
+  });
 
-    document.addEventListener('click', (e) => {
-      // если клик не по этому полю и не по его popup
+  // Один глобальный обработчик закрытия
+  document.addEventListener('click', (e) => {
+    fields.forEach(field => {
+      const popup = field.querySelector('.search__type');
+
+      // Если popup отсутствует — пропускаем
+      if (!popup) return;
+
+      // Если клик вне данного блока — скрываем
       if (!field.contains(e.target)) {
         popup.classList.remove('search__type--show');
       }

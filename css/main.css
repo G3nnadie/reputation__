@@ -782,7 +782,7 @@ body {
   padding: 0 8px;
 }
 
-.search__type-list li span:last-child {
+.search__type-list li span:not(:first-child) {
   border-left: 1px solid #CBD5E1;
 }
 
@@ -818,6 +818,7 @@ body {
   color: #64748B;
   margin-top: 8px;
   font-size: 14px;
+  display: none !important;
 }
 
 .search__example span {
